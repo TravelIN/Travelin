@@ -50,17 +50,15 @@
 							<!-- Formulario -->
 							<p>
 								<div id="cuerpo">
-								    <form id="form-login" action="verificacion.php" method="post" autocomplete="on">
+								    <form id="form-login" action="" method="post" autocomplete="off">
 								        <p><label for="usuario">Usuario:</label></p>
 								        <p class="mb10"><input name="usuario" id="usuario" autofocus="" required="" type="text"></p>
 									    <p><label for="contrasenia">Contraseña:</label></p>
 									    <p class="mb10"><input name="contrasenia" id="contrasenia" required="" type="password"></p>
-									    <p><a href="recuperarPass.php">¿Olvidó su contraseña?</a></p>
+									    <p><a href="recuperarPass.htm">¿Olvidó su contraseña?</a></p>
 								    	<p><input name="btnIngresar" id="btnIngresar" value="Ingresar" class="boton" type="submit"></p>
 								    </form>
 							   	</div>
-
-
 							</p>
 						<!--</div>-->
 					</div>
@@ -73,7 +71,7 @@
 							<!-- Formulario -->
 							<p>
 								<div id="cuerpoReg">
-								    <form id="form-reg" action="registrar_u.php" method="post" autocomplete="off">
+								    <form id="form-reg" action="" method="post" autocomplete="off">
 								        <p><label for="nombre">Nombre:</label></p>
 								        <p class="mb10"><input name="nombre" id="nombre" autofocus="" required="" type="text"></p>
 								        <p><label for="mail">E-mail:</label></p>
@@ -159,7 +157,7 @@
 						<!--
 						<input type="text" id="txtDestino" placeholder="Busqueda por ciudad, provincia">
 						-->
-						<input type="button" id="btnBuscar" value="Buscar" onclick="location.href='busqueda.php'">
+						<button type="submit" id="btnBuscar">Buscar</button>
 
 					</form>
 				</div>
@@ -196,11 +194,80 @@
 					</div>
 				</section>
 -->
+				<div id="contDatosRegistro">
+					<div id="contDatosRegistro2">
+						<div id="tituloRegistro">
+							<p><h1>Perfil de Usuario.</h1></p>
+						</div>
+
+						<div id="cuerpoRegU">
+						    <form id="form-reg-u" action="" method="post" autocomplete="off">
+						        <p><label for="nombreP">Nombre:</label></p>
+						        <p><input name="nombreP" id="nombreP" autofocus="" required="" type="text"></p>
+						        
+						        <p><label for="apellidoP">Apellido:</label></p>
+						        <p><input name="apellidoP" id="apellidoP" autofocus="" required="" type="text"></p>
+						        
+						        <p><label for="nickP">Nombre de usuario:</label></p>
+						        <p><input name="nickP" id="nickP" required="" type="text"></p>
+
+						        <p><label for="mailP">E-mail:</label></p>
+						        <p><input name="mailP" id="mailP" required="" type="text"></p>
+							    
+						        <p><label for="paisP">Pais:</label></p>
+						        <p><input name="paisP" id="paisP" autofocus="" required="" type="text"></p>
+						        
+						        <p><label for="provinciaP">Provincia:</label></p>
+						        <p><input name="provinciaP" id="provinciaP" required="" type="text"></p>
+
+						        <p><label for="ciudadP">Ciudad:</label></p>
+						        <p><input name="ciudadP" id="ciudadP" required="" type="text"></p>
+
+
+
+
+
+
+
+
+
+							    <p><label for="passwordActual">Contraseña actual:</label></p>
+							    <p><input name="passwordActual" id="passwordActual" required="" type="password"></p>
+
+							    <p><label for="passwordN1">Contraseña nueva:</label></p>
+							    <p><input name="passwordN1" id="passwordN1" required="" type="password"></p>
+							    
+							    <p><label for="passwordN2">Repetir la Contraseña:</label></p>
+							    <p><input name="passwordN2" id="passwordN2" required="" type="password"></p>
+						    	
+						    	<p><input name="btnRegistrarse" id="btnRegistrarse" value="Registrarse" class="boton" type="submit"></p>
+						    </form>
+					   	</div>
+
+
+
+
+						<!--
+						<div id="provinciaResultados">
+							<h2>Provincia: San Luis</h2>
+						</div>
+						<div id="ciudadResultados">
+							<h2>Ciudad: Merlo </h2>
+						</div>
+						<div id="rubroResultados">
+							<h2>Rubro: Hotel</h2>
+						</div>
+					-->
+					</div>				
+
+				</div>
+
+
 				<section id="contenido"><!-- PONER UN COLOR DE FONDO DEL ARTICULO UN POCO MAS CLARO QUE #87C1B2 Ó BLANCO --> 
 					<div class="contArticIzq">
 						<article id="articPublic1" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Hotel Parque y Sol</h3></a></hgroup>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Hotel Parque y Sol</h3></a></hgroup>
 								<div id="ciudadPublic1"><p class="ciudadPublic">Merlo, San Luis </p></div>
 								<img id="imagenPublic1" class="thumb" src="imagenes/Hotel_Parque_Y_Sol.jpg" alt="Hotel Parque Y Sol">
 								<div id="textoPublic1"><p>Ubicado sobre Av del Sol en frente al Casino internacional Flamingo.<br>
@@ -220,7 +287,7 @@
 					<div class="contArticMed">
 						<article id="articPublic2" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Hostel Residencial Chachen</h3></a></hgroup>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Hostel Residencial Chachen</h3></a></hgroup>
 								<div id="ciudadPublic2"><p class="ciudadPublic">Merlo, San Luis</p></div>
 								<img id="imagenPublic2" class="thumb" src="imagenes/Hostel_Residencial_Chachen.jpg" alt="Hostel Residencial Chachen">
 								<div id="textoPublic2"><p>Residencial Chachen, ubicado en plena zona residencial de Merlo, a 12 cuadras de
@@ -239,12 +306,11 @@
 					<div class="contArticDer">
 						<article id="articPublic3" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Hotel Sol Cataratas</h3></a></hgroup>
-								<div id="ciudadPublic3"><p class="ciudadPublic">Puerto Iguazú, Misiones </p></div>
-								<img id="imagenPublic3" class="thumb" src="imagenes/Hotel_Sol_Cataratas.jpg" alt="Hotel Sol Cataratas">
-								<div id="textoPublic3"><p>Hotel Sol Cataratas esta rodeado por pintorescos árboles autóctonos,
-								le conceden un entorno de privacidad en pleno contacto con la naturaleza. Es perfecto para 
-								relajarse luego de un día de excursiones.</p></div>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Villa de Merlo Hotel & Spa</h3></a></hgroup>
+								<div id="ciudadPublic3"><p class="ciudadPublic">Merlo, San Luis </p></div>
+								<img id="imagenPublic3" class="thumb" src="imagenes/hotel_villa_merlo_hys_1.jpg" alt="Hotel Villa de Merlo - Hotel & Spa">
+								<div id="textoPublic3"><p>Con un estilo arquitectónico Cálido y Confortable.
+									El Hotel SPA Villa de Merlo ofrece un conjunto de comodidades y servicios que cubren ampliamente los requerimientos del turismo nacional e internacional. Las tarifas difieren de acuerdo a la vista disponible en cada habitacion.</p></div>
 							</div>
 							<div class="parteInfArtic">
 								<div class="califPublic">
@@ -258,12 +324,23 @@
 					<div class="contArticIzq">
 						<article id="articPublic4" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Hotel El Libertador</h3></a></hgroup>
-								<div id="ciudadPublic4"><p class="ciudadPublic">Puerto Iguazú, Misiones</p></div>
-								<img id="imagenPublic4" class="thumb" src="imagenes/Hotel_El_Libertador.gif" alt="Hotel El Libertador">
-								<div id="textoPublic4"><p>Hotel El Libertador, un lugar excepcional en medio del imponente escenario natural que ofrece Puerto Iguazú.
-								Usted encontrará un ambiente de comodidad y relax.
-								Estamos preparados para que su estadía sea inolvidable, para que disfrute de nuestros amplios espacios, vistas fantásticas y se sienta atendido por un equipo de personas que combinan profesionalismo con calidez humana.</p></div>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Hotel Mundial</h3></a></hgroup>
+								<div id="ciudadPublic4"><p class="ciudadPublic">Merlo, San Luis </p></div>
+								<img id="imagenPublic4" class="thumb" src="imagenes/hotel_mundial_1.jpg" alt="Hotel Mundial">
+								<div id="textoPublic4"><p>Todas las comodidades que usted necesita para disfrutar unas hermosas vacaciones.
+									<br>
+								    Aire acondicionado.
+								    Calefaccion central.
+								    TV en habitaciones.
+								    Piscina climatizada.
+								    Solarium.
+								    4000m2 de parque arbolado.
+
+								    Cajas de seguridad individuales.
+								    Zona Wi-Fi.
+								    Desayuno buffet.
+								    Asesoramiento turistico.
+								    Cocheras cubiertas.</p></div>
 							</div>
 							<div class="parteInfArtic">
 								<div class="califPublic">
@@ -272,11 +349,11 @@
 							</div>
 						</article>
 					</div>
-
+<!--
 					<div class="contArticMed">
 						<article id="articPublic5" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Solar Maiten</h3></a></hgroup>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Solar Maiten</h3></a></hgroup>
 								<div id="ciudadPublic5"><p class="ciudadPublic">Mendoza, Mendoza </p></div>
 								<img id="imagenPublic5" class="thumb" src="imagenes/Solar_Maiten.jpg" alt="Solar Maiten">
 								<div id="textoPublic5"><p>Pensando en alcanzar la mayor satisfacción al turista, nació SOLAR MAITEN. Ubicado en una zona estratégica, 
@@ -294,7 +371,7 @@
 					<div class="contArticDer">
 						<article id="articPublic6" class="articPublic">
 							<div class="parteSupArtic">
-								<hgroup><a href="detalles_publicacion.php"><h3 class="tituloPublic">Diplomatic Hotel</h3></a></hgroup>
+								<hgroup><a href="detalles_publicacion.htm"><h3 class="tituloPublic">Diplomatic Hotel</h3></a></hgroup>
 								<div id="ciudadPublic6"><p class="ciudadPublic">Mendoza, Mendoza</p></div>
 								<img id="imagenPublic6" class="thumb" src="imagenes/Diplomatic_Hotel.jpg" alt="Diplomatic Hotel">
 								<div id="textoPublic6"><p>Excelente ubicación. Rodeado de la mejor oferta gastronómica, wine shops y tiendas 
@@ -307,10 +384,12 @@
 								</div>
 							</div>
 						</article>
-					</div><!--
+					</div>
+-->
+					<!--
 -->
 				</section>
-
+<!--
 				<aside>
 					<section class="widget">
 						<div id="textoAnunciese">
@@ -322,25 +401,11 @@
 						<div id="imagenAnunciese">
 							<a href="#"><img id="imagPublica" src="imagenes/publicaAnuncio.png"></a>
 						</div>
-<!--
-						<ul>
-							<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-							<li><a href="#">Nullam et est in enim gravida.</a></li>
-							<li><a href="" f="#">Curabitur interdum nisi sed.</a></li>
-							<li><a href="#">Nam sodales augue posuere.</a></li>
-							<li><a href="#">Curabitur vehicula ligula.</a></li>
+					
+					</section>
 
-						</ul>
--->						
-					</section>
-<!--
-					<section class="widget">
-						<h3>Articulos Recientes</h3>
-						<img src="imagenes/publicidad.png" />
-					</section>
--->
 				</aside>
-
+-->
 			</section>
 
 
