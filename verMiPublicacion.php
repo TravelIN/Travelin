@@ -13,6 +13,19 @@
 				});			
 	        });
 	   });
+
+	   $("#ddlProvinciaP").change(function () {
+	   		$("#ddlProvinciaP option:selected").each(function () {
+				//alert($(this).val());
+				//alert('1');
+					elegido=$(this).val();
+					elegCiudad = $('#ciuEleg').val();
+					$.post("ddlProvincia2.php", { elegido: elegido, elegCiudad: elegCiudad }, function(data){
+					$("#ddlCiudadP").html(data);
+					$("#combo3").html("");
+				});			
+	        });
+	    });
 	});
 </script>
 
@@ -49,13 +62,13 @@
 				$result1 = mysqli_query($objeConexion->conectarse(), $query1) or die(mysqli_error());;
 				while($row = mysqli_fetch_array($result1)){
 			?>
-					<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["idTipoEstableci"]; ?>" <?php 
+					<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["idTipoEstableci"]; ?>" <?php 
 																														if($row["idTipoEstableci"] == $tipoEstablecimiento)
 																														{
 																															echo ("selected");
 																														}
 																														?> > 
-						<?php echo $row["descripcion"]; ?> <!--<?php echo $row["descripcion"]; ?> -->
+						<?php echo utf8_encode($row["descripcion"]); ?> <!--<?php echo $row["descripcion"]; ?> -->
 			        </option>
 			<?php
 				}

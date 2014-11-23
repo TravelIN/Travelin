@@ -13,8 +13,8 @@
 								$result = mysqli_query($objeConexion->conectarse(), $query) or die(mysqli_error());;
 								while($row = mysqli_fetch_array($result)){
 							?>
-									<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["id"]; ?>"> 
-										<?php echo $row["descripcion"]; ?> <!--<?php echo $row["descripcion"]; ?> -->
+									<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["id"]; ?>"> 
+										<?php echo utf8_encode($row["descripcion"]); ?>
 		                            </option>
 							<?php
 								}
@@ -37,8 +37,8 @@
 								$result3 = mysqli_query($objeConexion->conectarse(), $query3) or die(mysqli_error());;
 								while($row3 = mysqli_fetch_array($result3)){
 							?>
-									<option title="<?php echo $row3["descripcion"]; ?>" value="<?php echo $row3["idTipoEstableci"]; ?>"> 
-										<?php echo $row3["descripcion"]; ?>
+									<option title="<?php echo utf8_encode($row3["descripcion"]); ?>" value="<?php echo $row3["idTipoEstableci"]; ?>"> 
+										<?php echo utf8_encode($row3["descripcion"]); ?>
 		                            </option>
 							<?php
 								}

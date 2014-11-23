@@ -26,11 +26,11 @@
 				}
 ?>
 				<!--$rpta='<option value="2">holaaa</option>';-->
-				<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["id"]; ?>" <?php
+				<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["id"]; ?>" <?php
 																										if($marcado== $row["id"]){
 																											echo ('selected');
 																										} ?> > 
-					<?php echo $row[1]; ?> 
+					<?php echo utf8_encode($row[1]); ?> 
 		        </option>
 
 		<?php

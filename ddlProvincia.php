@@ -18,8 +18,8 @@
 			while($row = mysqli_fetch_array($result)){
 ?>
 				<!--$rpta='<option value="2">holaaa</option>';-->
-				<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["id"]; ?>"> 
-					<?php echo $row[1]; ?> 
+				<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["id"]; ?>"> 
+					<?php echo utf8_encode($row[1]); ?> 
 		        </option>
 
 		<?php
