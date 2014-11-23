@@ -7,47 +7,51 @@
 	$pass = $_POST['regContrasenia'];
 		
 	include 'coneccion.php';
-
-	$db = new mysqli($dbServidor, $dbUsuario, $dbPassword, $dbAUsar);
-
-	if($db->connect_errno > 0){
-	    die('Imposible conectar [' . $db->connect_error . ']');
-	    //echo 'Imposible conectar';
-	}
-
+	
+	$db = new Conexion();
  
-	$sql = 'SELECT * FROM usuario WHERE email="'.$email.'"';
-	 
-	if(!$resultado = $db->query($sql)){
-	    die('Ocurrio un error ejecutando el query para ver si ya existe el mail [' . $db->error . ']');
+ 	$sql = 'SELECT * FROM usuario WHERE email="'.$email.'"';
+	//$sql = 'SELECT * FROM usuario WHERE email="'.$email.'" and password="'.$pass.'"';
+	
+	if(!$resultado = mysqli_query($db->conectarse(), $sql)){
+	    die('Ocurrio un error ejecutando el query para ver si ya existe el mail [' . mysqli_error() . ']');
 	    //echo 'Ocurrio un error ejecutando el query';
 	}
-	
+	/*if(!$resultado = mysqli_query($db->conectarse(), $sql)){
+	    die('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+	    //echo 'Ocurrio un error ejecutando el query';
+	}
+	*/
 	$cantResultados = $resultado->num_rows;
 	if($cantResultados >= 1)
 	{
+		mysqli_close($db);
+
 		die('El mail usado ya esta registrado.');
 		//echo 'Datos malos, hay mas de un registro con esos datos.';
 	}else
 		{
-			$sql = 'INSERT INTO usuario (nombre, email, password) VALUES ("'.$nombre.'", "'.$email.'", "'.$pass.'")';
+			$sql2 = 'INSERT INTO usuario (nombre, email, password) VALUES ("'.$nombre.'", "'.$email.'", "'.$pass.'")';
  
-			if(! $db->query($sql)){
-			     die('Ocurrio un error ejecutando el query [' . $db->error . ']');
-			}
+			if(!mysqli_query($db->conectarse(), $sql2)){
+			     die('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+			}else
+				{
+					mysqli_close($db);	//WARNING
+/*
+					echo '<html><head></head><body>';
+					echo '<script language="javascript">';
+					//echo 'window.location="index.php"';
+					echo 'window.location="detalles_publicacion.php"';
+					echo '</script>';
+					echo '</body></html>';
+*/
+				}
+
 			 
 			//echo 'Filas Insertadas: '.$db->affected_rows;
 		}
 
-	$db->close();
+	mysqli_close($db);	//WARNING
 
-/*
-	echo '<html><head></head><body>';
-	echo '<script language="javascript">';
-	echo 'window.location="index.php"';
-	//echo 'window.location="detalles_publicacion.php"';
-	echo '</script>';
-	echo '</body></html>';
-*/
-	
 ?>

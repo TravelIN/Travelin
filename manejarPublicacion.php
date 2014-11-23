@@ -2,7 +2,20 @@
 	//session_destroy();
 	session_start();
 
-	$email = $_POST['usuario'];
+	include 'coneccion.php';
+	
+	$db = new Conexion();
+
+	$idUsuario = $_SESSION['idUsuario'];
+	//$idUsuario = 2;
+	$nombre = $_POST['nombre'];
+	$direccion = $_POST['direccion'];
+	$descripcion = $_POST['descripcion'];
+	$tipoEstablecimiento = $_POST['tipoEstablecimiento'];
+	$provincia = $_POST['ddlProvinciaP'];
+	$ciudad	= $_POST['ddlCiudadP'];
+
+/*	$email = $_POST['usuario'];
 	$pass = $_POST['contrasenia'];
 	
 	include 'coneccion.php';
@@ -15,8 +28,31 @@
 	    //echo 'Imposible conectar';
 	}
 */	 
-	$sql = 'SELECT * FROM usuario WHERE email="'.$email.'" and password="'.$pass.'"';
-	 
+	
+	$sql = 'INSERT INTO establecimiento (nombre, direccion, descripcion, idUsuario, idTipoEstableci, idCiudad, idEstado) 
+		VALUES ("'.$nombre.'", "'.$direccion.'", "'.$descripcion.'", "'.$idUsuario.'", "'.$tipoEstablecimiento.'", "'.$ciudad.'", 1)';
+	
+	if(!mysqli_query($db->conectarse(), $sql)){
+	    //echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+	    echo('nom= '.$nombre.' , direc= '.$direccion.', desc='.$descripcion.', idus='.$idUsuario.', tipoest='.$tipoEstablecimiento.', ciud='.$ciudad.', prov='.$provincia);
+	}else
+		{
+			//mysqli_close($db);	//WARNING
+
+			echo '<html><head></head><body>';
+			echo '<script language="javascript">';
+			echo 'window.location="index.php"';
+			//echo 'window.location="detalles_publicacion.php"';
+			echo '</script>';
+			echo '</body></html>';
+
+		}
+
+
+
+
+/*
+
 	if(!$resultado = mysqli_query($db->conectarse(), $sql)){
 	    die('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
 	    //echo 'Ocurrio un error ejecutando el query';
@@ -54,7 +90,7 @@
 						//echo 'logueado!!';
 						echo '<html><head></head><body>';
 						echo '<script language="javascript">';
-						echo 'window.location="index.php"';
+						echo 'window.location="busqueda.php"';
 						echo '</script>';
 						echo '</body></html>';
 					}
@@ -62,5 +98,5 @@
 		}
 
 	mysqli_close($db);
-
+*/
 ?>
