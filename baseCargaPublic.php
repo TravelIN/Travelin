@@ -91,11 +91,47 @@
 				
 
 				<section id="contenido"><!-- PONER UN COLOR DE FONDO DEL ARTICULO UN POCO MAS CLARO QUE #87C1B2 Ó BLANCO --> 
-					<?php //include("textoIndex.php"); ?>
 					<?php 
-						//include("crearPublicacion.php");
-						include("verMiPublicacion.php");
-					?>
+						$idUsuario = $_SESSION['idUsuario'];
+						
+						$sql0 = 'SELECT COUNT(1) AS cantEstableci FROM establecimiento WHERE idUsuario = '.$idUsuario.' AND idEstado = 2';
+						
+						if(!$resultado = mysqli_query($objeConexion->conectarse(), $sql0))
+						{
+						    echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+						}else
+							{
+								$reg = mysqli_fetch_assoc($resultado);
+								//$cantResultados = $resultado->num_rows;
+
+								if($reg['cantEstableci'] == 1)//AL CREAR YA ESTA ACTIVO X ESO NO PREGUNTO X ESE ESTADO ACÁ TAL VEZ FALTARIA POR SUSPENDIDO
+								{
+									//echo('uno');
+									include("verMiPublicacion.php");
+								}else
+									{
+										if($reg['cantEstableci'] > 1)
+										{
+											echo '<script language="javascript">';
+											echo 'alert("Posee mas de un anuncio (solo 1 se permite)");';
+											echo '</script>';
+											echo '<html><head></head><body>';
+											echo '<script language="javascript">';
+											echo 'window.location="index.php"';
+											echo '</script>';
+											echo '</body></html>';
+										}else
+											{
+												if($reg['cantEstableci'] == 0)
+												{
+													//echo('0');
+													include("crearPublicacion.php");
+												}
+											}
+									}
+							}
+?>
+					
 				</section>
 
 				<?php include("anunciese1.php"); ?>

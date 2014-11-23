@@ -8,7 +8,8 @@
 
 	$idUsuario = $_SESSION['idUsuario'];
 	
-	$sql = 'SELECT E.*, C.idProvincia AS provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad=C.id WHERE idUsuario = '.$idUsuario.' LIMIT 1';
+	$sql = 'SELECT E.*, C.idProvincia AS provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad=C.id 
+			WHERE idUsuario = '.$idUsuario.' AND E.idEstado = 2 LIMIT 1';
 
 	
 	if(!$resultado = mysqli_query($db->conectarse(), $sql)){

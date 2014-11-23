@@ -21,12 +21,13 @@
 	<h3>Mí anuncio.</h3>
  	<?php include ("miEstableci.php"); ?>
 
-	<form action="#.php" method="post" enctype="multipart/form-data">
+	<form action="actualizarMiPublicacion.php" method="post" enctype="multipart/form-data">
 	 
 	
 		<label for="nombre">Nombre</label> <br/>
 		<input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>">
 	    
+	    <input type="hidden" id="idEstableci" name="idEstableci" value="<?php echo $idEstableci ?>">
 	    <input type="hidden" id="ciuEleg" name="ciuEleg" value="<?php echo $ciudad ?>">
 		<br/><br/>
 	 
@@ -96,7 +97,7 @@
 		<br/><br/>
 
 		<input type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
-		<input type="reset" id="btnCancelar" name="btnCancelar" value="Cancelar" />
+		<input type="button" id="btnBaja" name="btnBaja" value="Eliminar Establecimiento" onclick="location.href='bajaPublic.php?estableci=<?php echo ($idEstableci); ?>'" />
 	 	<br/><br/><br/>
 	</form>
 

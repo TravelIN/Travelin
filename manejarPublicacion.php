@@ -15,88 +15,45 @@
 	$provincia = $_POST['ddlProvinciaP'];
 	$ciudad	= $_POST['ddlCiudadP'];
 
-/*	$email = $_POST['usuario'];
-	$pass = $_POST['contrasenia'];
-	
-	include 'coneccion.php';
-	$db = new Conexion();
-/*
-	$db = new mysqli($dbServidor, $dbUsuario, $dbPassword, $dbAUsar);
 
-	if($db->connect_errno > 0){
-	    die('Imposible conectar [' . $db->connect_error . ']');
-	    //echo 'Imposible conectar';
-	}
-*/	 
-	
-	$sql = 'INSERT INTO establecimiento (nombre, direccion, descripcion, idUsuario, idTipoEstableci, idCiudad, idEstado) 
-		VALUES ("'.$nombre.'", "'.$direccion.'", "'.$descripcion.'", "'.$idUsuario.'", "'.$tipoEstablecimiento.'", "'.$ciudad.'", 1)';
-	
-	if(!mysqli_query($db->conectarse(), $sql)){
-	    //echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
-	    echo('nom= '.$nombre.' , direc= '.$direccion.', desc='.$descripcion.', idus='.$idUsuario.', tipoest='.$tipoEstablecimiento.', ciud='.$ciudad.', prov='.$provincia);
-	}else
-		{
-			//mysqli_close($db);	//WARNING
+	$sql1 = 'SELECT COUNT(1) AS cantActivos FROM establecimiento WHERE idUsuario='.$idUsuario.' AND idEstado = 2';
 
-			echo '<html><head></head><body>';
-			echo '<script language="javascript">';
-			echo 'window.location="index.php"';
-			//echo 'window.location="detalles_publicacion.php"';
-			echo '</script>';
-			echo '</body></html>';
-
-		}
-
-
-
-
-/*
-
-	if(!$resultado = mysqli_query($db->conectarse(), $sql)){
-	    die('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
-	    //echo 'Ocurrio un error ejecutando el query';
-	}
-	
-	$cantResultados = $resultado->num_rows;
-	if($cantResultados > 1)
+	if(!$cant = mysqli_query($db->conectarse(), $sql1))
 	{
-		die('Datos malos, hay mas de un registro con esos datos.');
-		//echo 'Datos malos, hay mas de un registro con esos datos.';
+		echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
 	}else
 		{
-			if($cantResultados != 1)
-			{
-				mysqli_close($db);
-				die('No se encontró un registro con esos datos.');
-				//echo 'No se encontró un registro con esos datos.';
-				echo '<html><head></head><body>';
-				echo '<script language="javascript">';
-				echo 'window.location="error.php"';
-				echo '</script>';
-				echo '</body></html>';
-			}else
-				{
-					if($cantResultados == 1)
-					{
-						$fila = $resultado->fetch_assoc();
-						
-						$_SESSION['idUsuario'] = $fila['idUsuario'];
-						$_SESSION['nick'] = $fila['nick'];
-						$_SESSION['fotoPerfil'] = $fila['nombreFotoPerfil'];
-						
-						mysqli_close($db);
+			$activos = mysqli_fetch_assoc($cant);
+			//$cantResultados = $resultado->num_rows;
 
-						//echo 'logueado!!';
+			if($activos['cantActivos'] == 0)
+			{	
+				$sql2 = 'INSERT INTO establecimiento (nombre, direccion, descripcion, idUsuario, idTipoEstableci, idCiudad, idEstado) 
+					VALUES ("'.$nombre.'", "'.$direccion.'", "'.$descripcion.'", "'.$idUsuario.'", "'.$tipoEstablecimiento.'", "'.$ciudad.'", 2)';
+				
+				if(!mysqli_query($db->conectarse(), $sql2)){
+				    echo('Ocurrio un error ejecutando el query de insert[' . mysqli_error() . ']');
+					//echo('nom= '.$nombre.' , direc= '.$direccion.', desc='.$descripcion.', idus='.$idUsuario.', tipoest='.$tipoEstablecimiento.', ciud='.$ciudad.', prov='.$provincia);
+				}else
+					{
 						echo '<html><head></head><body>';
 						echo '<script language="javascript">';
-						echo 'window.location="busqueda.php"';
+						echo 'window.location="index.php"';
+						//echo 'window.location="detalles_publicacion.php"';
 						echo '</script>';
 						echo '</body></html>';
 					}
+			}else
+				{
+					echo '<script language="javascript">';
+					echo 'alert("Ya posee un anuncio activo(solo 1 se permite)");';
+					echo '</script>';
+					echo '<html><head></head><body>';
+					echo '<script language="javascript">';
+					echo 'window.location="index.php"';
+					echo '</script>';
+					echo '</body></html>';
 				}
 		}
 
-	mysqli_close($db);
-*/
 ?>

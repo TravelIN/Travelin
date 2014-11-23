@@ -19,7 +19,7 @@
 			echo '<option value="0">Elija una ciudad</option>';
 
 			$query = "SELECT * FROM ciudad WHERE idProvincia = '".$valor."'";
-			$result = mysqli_query($objeConexion->conectarse(), $query) or die(mysqli_error());;
+			$result = mysqli_query($objeConexion->conectarse(), $query) or die(mysqli_error());//;
 			while($row = mysqli_fetch_array($result)){
 				if($marcado== $row["id"]){
 
