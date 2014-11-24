@@ -93,46 +93,47 @@
 				
 
 				<section id="contenido"><!-- PONER UN COLOR DE FONDO DEL ARTICULO UN POCO MAS CLARO QUE #87C1B2 Ó BLANCO --> 
-					<?php 
-						$idUsuario = $_SESSION['idUsuario'];
-						
-						$sql0 = 'SELECT COUNT(1) AS cantEstableci FROM establecimiento WHERE idUsuario = '.$idUsuario.' AND idEstado = 2';
-						
-						if(!$resultado = mysqli_query($objeConexion->conectarse(), $sql0))
-						{
-						    echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
-						}else
-							{
-								$reg = mysqli_fetch_assoc($resultado);
-								//$cantResultados = $resultado->num_rows;
+					
+					<div id="agrupFormCiudad" name="agrupFormCiudad">
 
-								if($reg['cantEstableci'] == 1)//AL CREAR YA ESTA ACTIVO X ESO NO PREGUNTO X ESE ESTADO ACÁ TAL VEZ FALTARIA POR SUSPENDIDO
-								{
-									//echo('uno');
-									include("verMiPublicacion.php");
-								}else
-									{
-										if($reg['cantEstableci'] > 1)
-										{
-											echo '<script language="javascript">';
-											echo 'alert("Posee mas de un anuncio (solo 1 se permite)");';
-											echo '</script>';
-											echo '<html><head></head><body>';
-											echo '<script language="javascript">';
-											echo 'window.location="index.php"';
-											echo '</script>';
-											echo '</body></html>';
-										}else
-											{
-												if($reg['cantEstableci'] == 0)
-												{
-													//echo('0');
-													include("crearPublicacion.php");
-												}
-											}
+						<h3>Dá de alta tu ciudad</h3>
+					 	
+
+						<form action="manejadorNuevaCiudad.php" method="post" enctype="multipart/form-data">
+													
+							<br/><br/>
+
+							<label for="ddlProvinciaN">Provincia</label> 
+							<select id="ddlProvinciaN" name="ddlProvinciaN">
+								<option value="0">Elija una provincia</option>
+								<?php 
+									$query = "SELECT PR.id, PR.descripcion FROM provincia PR INNER JOIN pais PA ON PR.idPais = PA.id WHERE PA.codAlfa LIKE 'ARG'";
+									$result = mysqli_query($objeConexion->conectarse(), $query) or die(mysqli_error());;
+									while($row = mysqli_fetch_array($result)){
+								?>
+										<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["id"]; ?>"> 
+											<?php echo utf8_encode($row["descripcion"]); ?> <!--<?php echo $row["descripcion"]; ?> -->
+								        </option>
+								<?php
 									}
-							}
-?>
+								?>
+							</select>
+
+							<br/><br/>
+
+							<label for="txtCiudad">Ciudad</label> 
+							<input type="text" id="txtCiudad" name="txtCiudad" />
+							
+							<br/><br/>
+
+							<input type="submit" id="btnCrear" name="btnCrear" value="Crear" />
+							<input type="reset" id="btnCancelar" name="btnCancelar" value="Cancelar" />
+						 	<br/><br/><br/>
+						</form>
+
+					</div>
+
+
 					
 				</section>
 

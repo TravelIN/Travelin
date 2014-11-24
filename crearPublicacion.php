@@ -63,8 +63,8 @@
 				$result = mysqli_query($objeConexion->conectarse(), $query) or die(mysqli_error());;
 				while($row = mysqli_fetch_array($result)){
 			?>
-					<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["id"]; ?>"> 
-						<?php echo $row["descripcion"]; ?> <!--<?php echo $row["descripcion"]; ?> -->
+					<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["id"]; ?>"> 
+						<?php echo utf8_encode($row["descripcion"]); ?>
 			        </option>
 			<?php
 				}
@@ -77,6 +77,8 @@
 		<select id="ddlCiudadP" name="ddlCiudadP">
 			<option value="0">Elija una ciudad</option>
 		</select>
+
+		<a href="nuevaCiudad.php"> ¿La ciudad que busca no figura? </a>
 
 		<br/><br/>
 

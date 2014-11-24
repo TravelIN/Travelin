@@ -107,6 +107,8 @@
 			<option value="0">Elija una ciudad</option>
 		</select>
 
+		<a href="nuevaCiudad.php"> ¿La ciudad que busca no figura? </a>
+
 		<br/><br/>
 
 		<input type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
