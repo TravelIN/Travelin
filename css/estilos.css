@@ -619,7 +619,8 @@ input#contrasenia{
 	margin: auto;
 	padding-bottom: 15px;
 	width: 286px;
-	height: 165;
+	/*height: 165;*/
+	height: 165px;
 }
 
 #contenido article p {

@@ -7,7 +7,27 @@
 							y recomendarselo a sus amigos. </p>
 						</div>
 						<div id="imagenAnunciese">
-							<a href="baseCargaPublic.php"><img id="imagPublica" src="imagenes/publicaAnuncio.png"></a>
+	
+						<?php 
+
+							if(isset($_SESSION['idUsuario']))
+							{
+								echo ('<a href="baseCargaPublic.php"><img id="imagPublica" src="imagenes/publicaAnuncio.png"></a>');
+							}else
+								{
+						?>
+									<script type="text/javascript">
+										function confirm_alert()
+										{
+											alert("Debe estar logueado para crear un anuncio.");
+										}
+									</script>
+									
+									<a href="#" onclick="confirm_alert();"><img id="imagPublica" src="imagenes/publicaAnuncio.png"></a>
+						<?php
+								}
+						?>
+
 						</div>
 					</section>
 				</aside>

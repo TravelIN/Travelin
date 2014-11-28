@@ -82,6 +82,11 @@
 
 		<br/><br/>
 
+		<label for="fileFotoEstableci">Foto del anuncio</label>
+		<input type="file" name="fileFotoEstableci" id="fileFotoEstableci">
+
+		<br/><br/>
+		
 		<input type="submit" id="btnCrear" name="btnCrear" value="Crear" />
 		<input type="reset" id="btnCancelar" name="btnCancelar" value="Cancelar" />
 	 	<br/><br/><br/>

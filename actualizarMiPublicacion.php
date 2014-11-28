@@ -15,18 +15,32 @@
 	$tipoEstablecimiento = $_POST['tipoEstablecimiento'];
 	//$provincia = $_POST['ddlProvinciaP'];
 	$ciudad	= $_POST['ddlCiudadP'];
-/*
-	$sql1 = 'SELECT * FROM establecimiento WHERE idEstableci = "'.$idEstableci.'"';
+/*****************************************************************/
+	$Nombre = $_FILES['fileFotoEstableci']['name'];
+	//foreach($_FILES['fileFotoEstableci']['name'] as $imagen=>$Nombre)
+	//{
 
-	$result = mysqli_query($db->conectarse(), $sql1) or die(mysqli_error());
+		if($Nombre != '')
+		{
+			$Extencion = explode('.' , $Nombre);
+			//$Destino = 'fotoEstablecimiento/Img-'.$idEstableci.'-'.rand(10, 30).'_'.rand(10, 30).'_'.rand(10, 30).'.'.$Extencion[1];
+			$Destino = 'fotoEstablecimiento/Img-'.$idEstableci.'.'.$Extencion[1];
 
-	$row = mysqli_fetch_array($result);
+			//if(copy($_FILES['fileFotoEstableci']['tmp_name'][$imagen] , $Destino))
+			if(copy($_FILES['fileFotoEstableci']['tmp_name'] , $Destino))
+			{
 
-	//echo ($row['idUsuario']);
-	if($row['idUsuario'] == $idUsuario)
-	{
-*/
-	$sql1 = 'UPDATE establecimiento SET nombre="'.$nombre.'", direccion="'.$direccion.'", descripcion="'.$descripcion.'", idTipoEstableci='.$tipoEstablecimiento.', idCiudad='.$ciudad.' WHERE idEstableci='.$idEstableci.' AND idUsuario='.$idUsuario;
+				$sql1 = 'UPDATE establecimiento SET nombre="'.$nombre.'", direccion="'.$direccion.'", descripcion="'.$descripcion.'", idTipoEstableci='.$tipoEstablecimiento.', idCiudad='.$ciudad.', rutaFotoEstableci="'.$Destino.'" WHERE idEstableci='.$idEstableci.' AND idUsuario='.$idUsuario;
+
+			}else
+				{
+					echo('<Li>No se pudo subir el archivo: <B>'.$Nombre.'</B> </Li>');
+				}
+		}else
+			{
+				$sql1 = 'UPDATE establecimiento SET nombre="'.$nombre.'", direccion="'.$direccion.'", descripcion="'.$descripcion.'", idTipoEstableci='.$tipoEstablecimiento.', idCiudad='.$ciudad.' WHERE idEstableci='.$idEstableci.' AND idUsuario='.$idUsuario;
+			}
+	//}
 	
 	if(!mysqli_query($db->conectarse(), $sql1))
 	{

@@ -111,6 +111,12 @@
 
 		<br/><br/>
 
+		<label for="fileFotoEstableci">Foto actual del anuncio</label>
+		<div id="fotoActual" name="fotoActual" width="143px" height="82px"><img src="<?php echo($urlFoto); ?>"></div>
+		<input type="file" name="fileFotoEstableci" id="fileFotoEstableci">
+
+		<br/><br/>
+
 		<input type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
 		<input type="button" id="btnBaja" name="btnBaja" value="Eliminar Establecimiento" onclick="location.href='bajaPublic.php?estableci=<?php echo ($idEstableci); ?>'" />
 	 	<br/><br/><br/>

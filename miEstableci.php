@@ -37,6 +37,7 @@
 							$descripcion = $fila['descripcion'];
 							$tipoEstablecimiento = $fila['idTipoEstableci'];
 							$ciudad	= $fila['idCiudad'];
+							$urlFoto = $fila['rutaFotoEstableci'];
 							$estado = $fila['idEstado'];
 
 							$provincia = $fila['provincia'];

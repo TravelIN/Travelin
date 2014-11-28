@@ -19,11 +19,11 @@
 		if($tipoEstableci == 0)
 		{
 			//echo "Muestra todo";
-			$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2';
+			$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2';
 		}else
 			{
 				//echo("filtra solo por rubro");
-				$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idTipoEstableci = '.$tipoEstableci.' AND E.idEstado = 2';
+				$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idTipoEstableci = '.$tipoEstableci.' AND E.idEstado = 2';
 			}
 	}else
 		{
@@ -32,22 +32,22 @@
 				if($tipoEstableci == 0)
 				{
 					//echo "filtra por provincia solamente".$provincia;
-					$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND P.id ='.$provincia;
+					$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND P.id ='.$provincia;
 				}else
 					{
 						//echo("filtra por provincia y rubro");
-						$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND P.id ='.$provincia.' AND E.idTipoEstableci = '.$tipoEstableci;
+						$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND P.id ='.$provincia.' AND E.idTipoEstableci = '.$tipoEstableci;
 					}
 			}else
 				{
 					if($tipoEstableci == 0)
 					{
 						//echo("filtra por (provincia) ciudad prov= ".$provincia." ciu= ".$ciudad);
-						$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND C.id = '.$ciudad;
+						$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND C.id = '.$ciudad;
 					}else
 						{
 							//echo("filtra por (provincia) ciudad y rubro");
-							$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND C.id = '.$ciudad.' AND E.idTipoEstableci = '.$tipoEstableci;
+							$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2 AND C.id = '.$ciudad.' AND E.idTipoEstableci = '.$tipoEstableci;
 						}
 				}
 		}
@@ -65,6 +65,13 @@
 			{
 				while($Rs = mysqli_fetch_array($result))
 				{
+					$direFoto = "";
+
+					if (!(($Rs['fotoE'] == '') || ($Rs['fotoE'] == null)))
+					{
+						$direFoto = $Rs['fotoE'];
+					}
+
 					switch ($contador)
 					{
 						case '1':
@@ -73,7 +80,7 @@
 										<div class="parteSupArtic">
 											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
 											<div id="ciudadPublic1"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
-											<img id="imagenPublic1" class="thumb" src="imagenes/Hotel_Parque_Y_Sol.jpg" alt="Hotel Parque Y Sol">
+											<img id="imagenPublic1" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic1"><p>'.$Rs['descE'].'</p></div>
 										</div>
 										<div class="parteInfArtic">
@@ -95,7 +102,7 @@
 										<div class="parteSupArtic">
 											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
 											<div id="ciudadPublic2"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].'</p></div>
-											<img id="imagenPublic2" class="thumb" src="imagenes/Hostel_Residencial_Chachen.jpg" alt="Hostel Residencial Chachen">
+											<img id="imagenPublic2" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic2"><p>'.$Rs['descE'].'</p></div>
 										</div>
 										<div class="parteInfArtic">
@@ -114,9 +121,9 @@
 							echo '<div class="contArticDer">
 									<article id="articPublic3" class="articPublic">
 										<div class="parteSupArtic">
-											<hgroup><a href="detalles_publicacion.php'.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
+										<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
 											<div id="ciudadPublic3"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
-											<img id="imagenPublic3" class="thumb" src="imagenes/Hotel_Sol_Cataratas.jpg" alt="Hotel Sol Cataratas">
+											<img id="imagenPublic3" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic3"><p>'.$Rs['descE'].'</p></div>
 										</div>
 										<div class="parteInfArtic">
