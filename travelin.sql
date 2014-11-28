@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2014 a las 03:53:30
+-- Tiempo de generación: 28-11-2014 a las 03:40:01
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `calificacion` (
   `idReserva` int(11) NOT NULL,
   `puntaje` int(11) NOT NULL,
-  `comentario` varchar(200) NOT NULL
+  `comentario` varchar(200) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `ciudad` (
 `id` int(11) NOT NULL,
   `descripcion` varchar(60) NOT NULL,
   `idProvincia` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4058 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4063 ;
 
 --
 -- Volcado de datos para la tabla `ciudad`
@@ -4106,7 +4106,12 @@ INSERT INTO `ciudad` (`id`, `descripcion`, `idProvincia`) VALUES
 (4054, 'Harare', 1394),
 (4055, 'Mount Darwin', 1394),
 (4056, 'Mutare', 1395),
-(4057, 'Gweru', 1396);
+(4057, 'Gweru', 1396),
+(4058, 'Merlo', 32),
+(4059, 'Alem', 28),
+(4060, 'Misiones', 28),
+(4061, 'Puerto Iguazu', 28),
+(4062, 'El Dorado', 28);
 
 -- --------------------------------------------------------
 
@@ -4150,16 +4155,18 @@ CREATE TABLE IF NOT EXISTS `establecimiento` (
   `idUsuario` int(11) NOT NULL,
   `idTipoEstableci` int(11) NOT NULL,
   `idCiudad` int(11) NOT NULL,
+  `rutaFotoEstableci` varchar(50) DEFAULT NULL,
   `idEstado` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `establecimiento`
 --
 
-INSERT INTO `establecimiento` (`idEstableci`, `nombre`, `direccion`, `lat`, `lng`, `descripcion`, `idUsuario`, `idTipoEstableci`, `idCiudad`, `idEstado`) VALUES
-(1, 'Hotel Parque y Sol', 'Av. del Sol 1478', NULL, NULL, '\r\n\r\nUbicado sobre Av del Sol en frente al Casino internacional Flamingo.\r\n30 habitaciones estandar - BaÃ±o privado - Aire acondicionado - Ventilador de techo - TelefonÃ­a - TV por cable - Piscina - Pileta para niÃ±os - Hidromasaje - 1 ha. de parque - Estacionamiento - Servicio de emergencias mÃ©dicas - Mucama.', 3, 3, 70, 2),
-(2, 'Hotel Sol Cataratas', '600 ha - Selva YryapÃº', NULL, NULL, '\r\n\r\nHotel Sol Cataratas esta rodeado por pintorescos Ã¡rboles autÃ³ctonos, le conceden un entorno de privacidad en pleno contacto con la naturaleza. Es perfecto para relajarse luego de un dÃ­a de excursiones.', 2, 3, 66, 2);
+INSERT INTO `establecimiento` (`idEstableci`, `nombre`, `direccion`, `lat`, `lng`, `descripcion`, `idUsuario`, `idTipoEstableci`, `idCiudad`, `rutaFotoEstableci`, `idEstado`) VALUES
+(1, 'Hotel Parque y Sol', 'Av. del Sol 1475', NULL, NULL, 'Ubicado sobre Av del Sol en frente al Casino internacional Flamingo.\r\n30 habitaciones estandar - BaÃ±o privado - Aire acondicionado - Ventilador de techo - TelefonÃ­a - TV por cable - Piscina - Pileta para niÃ±os - Hidromasaje - 1 ha. de parque - Estacionamiento - Servicio de emergencias mÃ©dicas - Mucama.', 1, 3, 4058, 'fotoEstablecimiento/Img-1.jpg', 2),
+(2, 'Hotel Sol Cataratas', '600 ha - Selva YryapÃº', NULL, NULL, 'Hotel Sol Cataratas esta rodeado por pintorescos Ã¡rboles autÃ³ctonos, le conceden un entorno de privacidad en pleno contacto con la naturaleza. Es perfecto para relajarse luego de un dÃ­a de excursiones.', 2, 3, 4061, 'fotoEstablecimiento/Img-2.jpg', 2),
+(3, 'Solar Maiten', 'en el solar 12345', NULL, NULL, 'Pensando en alcanzar la mayor satisfacciÃ³n al turista, naciÃ³ SOLAR MAITEN. Ubicado en una zona estratÃ©gica, en un barrio residencial a pocas cuadras del camino del vino y el polo gastronÃ³mico de la ciudad y a sÃ³lo minutos de paisajes, montaÃ±as, rios y aventuras. Es un apart hotel cuidadosamente decorado y equipado. ', 4, 3, 64, 'fotoEstablecimiento/Img-3.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -4516,7 +4523,7 @@ CREATE TABLE IF NOT EXISTS `parada` (
 
 CREATE TABLE IF NOT EXISTS `provincia` (
 `id` int(11) NOT NULL,
-  `descripcion` varchar(60) NOT NULL,
+  `descripcion` varchar(60) CHARACTER SET utf8 NOT NULL,
   `idPais` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1397 ;
 
@@ -6117,12 +6124,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4058;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4063;
 --
 -- AUTO_INCREMENT de la tabla `establecimiento`
 --
 ALTER TABLE `establecimiento`
-MODIFY `idEstableci` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idEstableci` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
