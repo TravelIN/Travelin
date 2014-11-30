@@ -24,4 +24,9 @@
 	echo ("con sha1(md5) = ".sha1(md5($fecha."hola mundo")));
 
 
+	echo "<br/><br/>";
+	$algo = date(d-m-Y_H_i_s);
+	echo $algo;
+
+
 ?>

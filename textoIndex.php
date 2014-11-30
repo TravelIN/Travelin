@@ -1,3 +1,128 @@
+<?php 
+	//session_destroy();
+
+	//include 'coneccion.php';
+	
+	$db = new Conexion();
+
+	//$idUsuario = $_SESSION['idUsuario'];
+	//$idUsuario = 2;
+	//$provincia = $_POST['ddlProvincia'];
+	//$ciudad = $_POST['ddlCiudad'];
+	//$tipoEstableci = $_POST['ddlProveedor'];
+
+	$contador = 1;
+	//$contadorTotal = 0;
+
+	$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia 
+			FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id 
+			WHERE E.idEstado = 2 ORDER BY RAND() LIMIT 6';
+
+
+
+/*
+	$sql = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, C.descripcion ciudad, P.descripcion provincia FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id WHERE E.idEstado = 2';
+*/	
+	
+	if(!$result = mysqli_query($db->conectarse(), $sql)){
+	    //echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+	    echo("MALLLLL");
+	}else
+		{
+			//echo '<div id="infoBusqueda" name="infoBusqueda">Cantidad de resultados encontrados: '.mysqli_num_rows($result).'<br/></div>';
+			if(mysqli_num_rows($result) > 0)
+			{
+				while($Rs = mysqli_fetch_array($result))
+				{
+					$direFoto = "imagenes/Imagen-para-sin-imagen.jpg";
+					//$contadorTotal += 1;
+
+					if (!(($Rs['fotoE'] == '') || ($Rs['fotoE'] == null)))
+					{
+						$direFoto = $Rs['fotoE'];
+					}
+
+					switch ($contador)
+					{
+						case '1':
+							echo '<div class="contArticIzq">
+									<article id="articPublic1" class="articPublic">
+										<div class="parteSupArtic">
+											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
+											<div id="ciudadPublic1"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
+											<img id="imagenPublic1" class="thumb" src="'.$direFoto.'">
+											<div id="textoPublic1"><p>'.$Rs['descE'].'</p></div>
+										</div>
+										<div class="parteInfArtic">
+											<div class="califPublic">
+												<img src="imagenes/5Estrellas.gif">
+											</div>
+										</div>
+
+									</article>
+								</div>';
+
+							$contador++;
+		
+							break;
+						
+						case '2':
+							echo '<div class="contArticMed">
+									<article id="articPublic2" class="articPublic">
+										<div class="parteSupArtic">
+											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
+											<div id="ciudadPublic2"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].'</p></div>
+											<img id="imagenPublic2" class="thumb" src="'.$direFoto.'">
+											<div id="textoPublic2"><p>'.$Rs['descE'].'</p></div>
+										</div>
+										<div class="parteInfArtic">
+											<div class="califPublic">
+												<img src="imagenes/3Estrellas.gif">
+											</div>
+										</div>
+									</article>
+								</div>';
+
+							$contador++;
+
+							break;
+
+						case '3':
+							echo '<div class="contArticDer">
+									<article id="articPublic3" class="articPublic">
+										<div class="parteSupArtic">
+										<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
+											<div id="ciudadPublic3"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
+											<img id="imagenPublic3" class="thumb" src="'.$direFoto.'">
+											<div id="textoPublic3"><p>'.$Rs['descE'].'</p></div>
+										</div>
+										<div class="parteInfArtic">
+											<div class="califPublic">
+												<img src="imagenes/5Estrellas.gif">
+											</div>
+										</div>
+									</article>
+									
+								</div>';
+
+							$contador = 1;
+							
+							break;
+					}
+					
+				}
+			}
+
+		}
+
+
+
+?>
+
+
+
+<!--
+
 					<div class="contArticIzq">
 						<article id="articPublic1" class="articPublic">
 							<div class="parteSupArtic">
@@ -108,5 +233,5 @@
 								</div>
 							</div>
 						</article>
-					</div><!--
+					</div>
 -->

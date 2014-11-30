@@ -1,5 +1,5 @@
 <?php 
-	session_destroy();
+//	session_destroy();
 	session_start();
 
 	$nombre = $_POST['nombre'];
@@ -37,21 +37,29 @@
 			     die('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
 			}else
 				{
-					mysqli_close($db);	//WARNING
-/*
-					echo '<html><head></head><body>';
-					echo '<script language="javascript">';
-					//echo 'window.location="index.php"';
-					echo 'window.location="detalles_publicacion.php"';
-					echo '</script>';
-					echo '</body></html>';
-*/
+	//				mysqli_close($db);	//WARNING
+					echo ('<html><head>
+								<script type="text/javascript">
+									function confirm_alert()
+									{
+										alert("Ya puede loguearse en el sistema.");
+									}
+								</script>
+							</head><body>
+							
+							<script>
+								confirm_alert();
+								window.location="index.php"
+							</script>
+							</body></html>');
+
+					
 				}
 
 			 
 			//echo 'Filas Insertadas: '.$db->affected_rows;
 		}
 
-	mysqli_close($db);	//WARNING
+//	mysqli_close($db);	//WARNING
 
 ?>

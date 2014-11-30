@@ -12,6 +12,7 @@
 	$tipoEstableci = $_POST['ddlProveedor'];
 
 	$contador = 1;
+	//$contadorTotal = 0;
 
 	//$sql = 'SELECT * FROM establecimiento WHERE idCiudad = '.$ciudad.' AND idTipoEstableci = '.$tipoEstableci.' AND idEstado = 2';
 	if($provincia == 0)//E.idEstado el valor 2 es activo, 1 pendiente, ............
@@ -61,11 +62,13 @@
 	    echo("MALLLLL");
 	}else
 		{
+			echo '<div id="infoBusqueda" name="infoBusqueda">Cantidad de resultados encontrados: '.mysqli_num_rows($result).'<br/></div>';
 			if(mysqli_num_rows($result) > 0)
 			{
 				while($Rs = mysqli_fetch_array($result))
 				{
-					$direFoto = "";
+					$direFoto = "imagenes/Imagen-para-sin-imagen.jpg";
+					//$contadorTotal += 1;
 
 					if (!(($Rs['fotoE'] == '') || ($Rs['fotoE'] == null)))
 					{

@@ -62,6 +62,8 @@
 									$sql4 = 'UPDATE establecimiento SET rutaFotoEstableci="'.$Destino.'" WHERE
 										  idEstableci='.$idEstableciBD.' AND idUsuario='.$idUsuario;
 
+									mysqli_query($db->conectarse(), $sql4);
+
 								}else
 									{
 										echo('<Li>No se pudo subir la foto: <B>'.$fotoNombre.'</B> </Li>');
@@ -81,6 +83,7 @@
 						//echo 'window.location="detalles_publicacion.php"';
 						echo '</script>';
 						echo '</body></html>';
+						
 					}
 			}else
 				{

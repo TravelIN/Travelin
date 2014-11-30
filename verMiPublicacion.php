@@ -111,8 +111,16 @@
 
 		<br/><br/>
 
-		<label for="fileFotoEstableci">Foto actual del anuncio</label>
-		<div id="fotoActual" name="fotoActual" width="143px" height="82px"><img src="<?php echo($urlFoto); ?>"></div>
+		<label for="fotoActual">Foto actual del anuncio</label>
+		<div id="fotoActual" name="fotoActual"><img src="<?php 
+																if($urlFoto =='')
+																{
+																	echo ('imagenes/Imagen-para-sin-imagen.jpg');
+																}else
+																	{
+																		echo($urlFoto);
+																	}
+															?>" id="imgFotoActual" name="imgFotoActual"></div>
 		<input type="file" name="fileFotoEstableci" id="fileFotoEstableci">
 
 		<br/><br/>

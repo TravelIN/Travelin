@@ -98,6 +98,7 @@
 				
 
 				<section id="contenido"><!-- PONER UN COLOR DE FONDO DEL ARTICULO UN POCO MAS CLARO QUE #87C1B2 Ó BLANCO --> 
+					
 					<?php include("resulBusqueda1.php"); ?>
 <!--
 					<div class="contArticIzq">

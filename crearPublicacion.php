@@ -45,8 +45,8 @@
 				$result1 = mysqli_query($objeConexion->conectarse(), $query1) or die(mysqli_error());;
 				while($row = mysqli_fetch_array($result1)){
 			?>
-					<option title="<?php echo $row["descripcion"]; ?>" value="<?php echo $row["idTipoEstableci"]; ?>"> 
-						<?php echo $row["descripcion"]; ?> <!--<?php echo $row["descripcion"]; ?> -->
+					<option title="<?php echo utf8_encode($row["descripcion"]); ?>" value="<?php echo $row["idTipoEstableci"]; ?>"> 
+						<?php echo utf8_encode($row["descripcion"]); ?> <!--<?php echo $row["descripcion"]; ?> -->
 			        </option>
 			<?php
 				}
