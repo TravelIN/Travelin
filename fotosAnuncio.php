@@ -20,7 +20,7 @@
 		{
 			while($fotos=mysqli_fetch_array($cons))
 			{
-				echo '<div class="contImag"><img src="'.$fotos["urlFotoEstableci"].'" class="imgFotoGaleria"></div>';
+				echo '<div class="contImag"><img src="galeriaEstablecimiento/miniaturas/'.$fotos["nombreFotoEstableci"].'" class="imgFotoGaleria"></div>';
 			}
 		}
 

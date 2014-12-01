@@ -242,6 +242,7 @@
 							</div><!-- rg-thumbs -->
 						</div><!-- rg-gallery -->
 					</div>
+					<a href="baseFotosAnuncio.php?lugar=<?php echo $_GET['lugar']; ?>"> Fotos </a>
 					<div id="contPanelReserva">
 						<div id="contPanelReserva2">
 							<div id="panelReservaPrecio">

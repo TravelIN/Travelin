@@ -49,7 +49,7 @@
 									<article id="articPublic1" class="articPublic">
 										<div class="parteSupArtic">
 											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
-											<div id="ciudadPublic1"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
+											<div id="ciudadPublic1"><p class="ciudadPublic">'.utf8_encode($Rs['ciudad']).', '.utf8_encode($Rs['provincia']).' </p></div>
 											<img id="imagenPublic1" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic1"><p>'.$Rs['descE'].'</p></div>
 										</div>
@@ -71,7 +71,7 @@
 									<article id="articPublic2" class="articPublic">
 										<div class="parteSupArtic">
 											<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
-											<div id="ciudadPublic2"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].'</p></div>
+											<div id="ciudadPublic2"><p class="ciudadPublic">'.utf8_encode($Rs['ciudad']).', '.utf8_encode($Rs['provincia']).'</p></div>
 											<img id="imagenPublic2" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic2"><p>'.$Rs['descE'].'</p></div>
 										</div>
@@ -92,7 +92,7 @@
 									<article id="articPublic3" class="articPublic">
 										<div class="parteSupArtic">
 										<hgroup><a href="detalles_publicacion.php?lugar='.$Rs['idE'].'"><h3 class="tituloPublic">'.$Rs['nombreE'].'</h3></a></hgroup>
-											<div id="ciudadPublic3"><p class="ciudadPublic">'.$Rs['ciudad'].', '.$Rs['provincia'].' </p></div>
+											<div id="ciudadPublic3"><p class="ciudadPublic">'.utf8_encode($Rs['ciudad']).', '.utf8_encode($Rs['provincia']).' </p></div>
 											<img id="imagenPublic3" class="thumb" src="'.$direFoto.'">
 											<div id="textoPublic3"><p>'.$Rs['descE'].'</p></div>
 										</div>

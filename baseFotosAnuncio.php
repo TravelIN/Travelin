@@ -85,16 +85,31 @@
 
 			</div>
 		</header>
+		<?php
+			$lugar = $_GET['lugar'];
 
+			$sql1 = 'SELECT E.idEstableci idE, E.nombre nombreE, E.descripcion descE, E.rutaFotoEstableci fotoE, C.descripcion ciudad, P.descripcion provincia 
+			FROM establecimiento E INNER JOIN ciudad C ON E.idCiudad= C.id INNER JOIN provincia P ON C.idProvincia=P.id 
+			WHERE E.idEstado = 2 AND idEstableci = '.$lugar;
+						
+			if(!$consu1 = mysqli_query($db->conectarse(), $sql1))
+			{
+			    echo('Ocurrio un error ejecutando la consulta del establecimiento. [' . mysqli_error() . ']');
+			}else
+				{
+					$res1 = mysqli_fetch_assoc($consu1);
+				}
+
+		?>
 		<div id="centrador">
 			<section id="contenido">
 				<div id="contTituloAnuncio">
 					<div id="contTituloIzq">
 						<div id="contNombreAnuncio">
-							<p><h2>Hotel Parque y Sol</h2></p>
+							<p><h2><?php echo($res1['nombreE']); ?></h2></p>
 						</div>
 						<div id="contCiudadAnuncio">
-							<p><h4>Merlo, San Luis</h4></p>
+							<p><h4><?php echo ($res1['ciudad'].", ".$res1['provincia']); ?></h4></p>
 						</div>
 					</div>
 					<div id="contTituloDer">
@@ -105,26 +120,41 @@
 				</div>
 
 				<div id="contMedioAnuncio">
-					<div id="agregarFotoAnuncio" name="agregarFotoAnuncio"><!-- FILTRAR con un IF SI idUsuario = idUsuario del anuncio  -->
-						<form id="formGaleria" name="formGaleria" method="POST" action="agregarAGaleria.php" enctype="Multipart/Form-Data">
-							<input type="file" name="fotoNueva[]" id="fotoNueva[]" >
-							<?php
-								$sql1 = 'SELECT idEstableci FROM establecimiento WHERE idUsuario='.$_SESSION["idUsuario"].' AND idEstado=2 LIMIT 1';
-								
-								if(!$consulta = mysqli_query($db->conectarse(), $sql1))
-								{
-								    echo('Ocurrio un error ejecutando el query de insert[' . mysqli_error() . ']');
-								}else
-									{
-										$resul = mysqli_fetch_assoc($consulta);
-									}
-							?>
-							<input type="hidden" id="lugar" name="lugar" value="<?php echo $resul['idEstableci']; ?>">
+					<?php
+						//$sql1 = 'SELECT idEstableci FROM establecimiento WHERE idUsuario='.$_SESSION["idUsuario"].' AND idEstado=2 LIMIT 1';
+						$sql2 = 'SELECT * FROM establecimiento WHERE idEstableci='.$_GET['lugar'].' AND idEstado=2 LIMIT 1';
+						
+						if(!$consulta = mysqli_query($db->conectarse(), $sql2))
+						{
+						    echo('Ocurrio un error ejecutando el query de insert[' . mysqli_error() . ']');
+						}else
+							{
+								$resul = mysqli_fetch_assoc($consulta);
+							}
 
-							<input type="submit" value="Subir">
 
-						</form>
-					</div>
+						if(isset($_SESSION['idUsuario'])) 
+						{
+							if($resul['idUsuario'] == $_SESSION['idUsuario'])
+							{
+					?>
+								<div id="agregarFotoAnuncio" name="agregarFotoAnuncio">
+									<form id="formGaleria" name="formGaleria" method="POST" action="agregarAGaleria.php" enctype="Multipart/Form-Data">
+										<input type="file" name="fotoNueva[]" id="fotoNueva[]" >
+										
+										<input type="hidden" id="lugarP" name="lugarP" value="<?php echo $resul['idEstableci']; ?>">
+
+										<input type="submit" value="Subir">
+
+									</form>
+								</div>
+
+					<?php
+							}
+							
+						}
+					?>
+					
 					<div id="galeriaAnuncio" name="galeriaAnuncio">
 						<?php include "fotosAnuncio.php"; ?>
 

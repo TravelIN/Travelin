@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2014 a las 03:40:01
+-- Tiempo de generación: 01-12-2014 a las 04:31:50
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `calificacion` (
 
 CREATE TABLE IF NOT EXISTS `ciudad` (
 `id` int(11) NOT NULL,
-  `descripcion` varchar(60) NOT NULL,
+  `descripcion` varchar(60) CHARACTER SET utf8 NOT NULL,
   `idProvincia` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4063 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4065 ;
 
 --
 -- Volcado de datos para la tabla `ciudad`
@@ -4111,7 +4111,9 @@ INSERT INTO `ciudad` (`id`, `descripcion`, `idProvincia`) VALUES
 (4059, 'Alem', 28),
 (4060, 'Misiones', 28),
 (4061, 'Puerto Iguazu', 28),
-(4062, 'El Dorado', 28);
+(4062, 'El Dorado', 28),
+(4063, 'La Falda', 20),
+(4064, 'Villa Carlos Paz', 20);
 
 -- --------------------------------------------------------
 
@@ -4147,26 +4149,32 @@ CREATE TABLE IF NOT EXISTS `diariodeviajero` (
 
 CREATE TABLE IF NOT EXISTS `establecimiento` (
 `idEstableci` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `direccion` varchar(40) NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `direccion` varchar(40) CHARACTER SET utf8 NOT NULL,
   `lat` float(10,6) DEFAULT NULL,
   `lng` float(10,6) DEFAULT NULL,
-  `descripcion` varchar(1000) NOT NULL,
+  `descripcion` varchar(1000) CHARACTER SET utf8 NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idTipoEstableci` int(11) NOT NULL,
   `idCiudad` int(11) NOT NULL,
-  `rutaFotoEstableci` varchar(50) DEFAULT NULL,
+  `rutaFotoEstableci` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `idEstado` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `establecimiento`
 --
 
 INSERT INTO `establecimiento` (`idEstableci`, `nombre`, `direccion`, `lat`, `lng`, `descripcion`, `idUsuario`, `idTipoEstableci`, `idCiudad`, `rutaFotoEstableci`, `idEstado`) VALUES
-(1, 'Hotel Parque y Sol', 'Av. del Sol 1475', NULL, NULL, 'Ubicado sobre Av del Sol en frente al Casino internacional Flamingo.\r\n30 habitaciones estandar - BaÃ±o privado - Aire acondicionado - Ventilador de techo - TelefonÃ­a - TV por cable - Piscina - Pileta para niÃ±os - Hidromasaje - 1 ha. de parque - Estacionamiento - Servicio de emergencias mÃ©dicas - Mucama.', 1, 3, 4058, 'fotoEstablecimiento/Img-1.jpg', 2),
-(2, 'Hotel Sol Cataratas', '600 ha - Selva YryapÃº', NULL, NULL, 'Hotel Sol Cataratas esta rodeado por pintorescos Ã¡rboles autÃ³ctonos, le conceden un entorno de privacidad en pleno contacto con la naturaleza. Es perfecto para relajarse luego de un dÃ­a de excursiones.', 2, 3, 4061, 'fotoEstablecimiento/Img-2.jpg', 2),
-(3, 'Solar Maiten', 'en el solar 12345', NULL, NULL, 'Pensando en alcanzar la mayor satisfacciÃ³n al turista, naciÃ³ SOLAR MAITEN. Ubicado en una zona estratÃ©gica, en un barrio residencial a pocas cuadras del camino del vino y el polo gastronÃ³mico de la ciudad y a sÃ³lo minutos de paisajes, montaÃ±as, rios y aventuras. Es un apart hotel cuidadosamente decorado y equipado. ', 4, 3, 64, 'fotoEstablecimiento/Img-3.jpg', 2);
+(1, 'Hotel Parque y Sol', 'Av. del Sol 1475', NULL, NULL, 'Ubicado sobre Av del Sol en frente al Casino internacional Flamingo.\r\n30 habitaciones estandar - BaÃ±o privado - Aire acondicionado - Ventilador de techo - TelefonÃ­a - TV por cable - Piscina - Pileta para niÃ±os - Hidromasaje - 1 ha. de parque - Estacionamiento - Servicio de emergencias mÃ©dicas - Mucama.', 1, 3, 4058, '', 2),
+(2, 'Hotel Sol Cataratas', '600 ha - Selva YryapÃº', NULL, NULL, 'Hotel Sol Cataratas esta rodeado por pintorescos Ã¡rboles autÃ³ctonos, le conceden un entorno de privacidad en pleno contacto con la naturaleza. Es perfecto para relajarse luego de un dÃ­a de excursiones.', 2, 3, 4061, '', 2),
+(3, 'Solar Maiten', 'en el solar 12345', NULL, NULL, 'Pensando en alcanzar la mayor satisfacciÃ³n al turista, naciÃ³ SOLAR MAITEN. Ubicado en una zona estratÃ©gica, en un barrio residencial a pocas cuadras del camino del vino y el polo gastronÃ³mico de la ciudad y a sÃ³lo minutos de paisajes, montaÃ±as, rios y aventuras. Es un apart hotel cuidadosamente decorado y equipado. ', 4, 3, 64, '', 2),
+(4, 'Hotel El Libertador', 'libertad 2485', NULL, NULL, 'Hotel El Libertador, un lugar excepcional en medio del imponente escenario natural que ofrece Puerto IguazÃº. Usted encontrarÃ¡ un ambiente de comodidad y relax. Estamos preparados para que su estadÃ­a sea inolvidable, para que disfrute de nuestros amplios espacios, vistas fantÃ¡sticas y se sienta atendido por un equipo de personas que combinan profesionalismo con calidez humana.', 3, 3, 4061, '', 2),
+(5, 'Residencial Chachen', 'lkijun1234', NULL, NULL, 'Residencial Chachen, ubicado en plena zona residencial de Merlo, a 12 cuadras de la plaza, a 5 cuadras del Casino Internacional, a 2 de Av. del Sol, a 3 del paseo de compras y sala de cine y al pie de las sierras de los Comechingones. Con la atenciÃ³n personalizada de sus dueÃ±os y asesoramiento turÃ­stico.', 6, 3, 4058, '', 2),
+(6, 'Diplomatic Hotel', 'algun lugar1234', NULL, NULL, 'Excelente ubicaciÃ³n. Rodeado de la mejor oferta gastronÃ³mica, wine shops y tiendas que lo convierten en la opciÃ³n ideal para los huÃ©spedes que disfrutan caminar sus alrededores, a la cual llamamos la Recoleta Mendocina.', 5, 3, 64, '', 2),
+(7, 'Costa Galana', 'Bvard. MarÃ­timo Patricio Peralta Ramos ', NULL, NULL, 'El Hotel Costa Galana, complejo hotelero 5 estrellas de lujo, estÃ¡ ubicado frente al mar, sobre la BahÃ­a de Playa Grande, en el aristocrÃ¡tico barrio â€œLos Troncosâ€ y a metros del Mar del Plata Golf Club y del centro comercial Alem.\r\nEs el primer Hotel cinco estrellas de lujo de SudamÃ©rica que ha certificado su sistema de gestiÃ³n de la calidad bajo normas ISO 9001:2000 para sus servicios de Alojamiento, Banquetes y Convenciones.\r\n\r\nDe clÃ¡sico y lujoso estilo europeo, ofrece el mÃ¡s alto nivel de confort. Dispone de 186 habitaciones las cuales cuentan con aire acondicionado, televisiÃ³n por Cable, telÃ©fono digital, express check-out, room service las 24 horas y conexiÃ³n WI-FI.\r\n\r\nDos Restaurantes â€œLa Bourgogneâ€ y â€œLa Terrazaâ€, un bar â€œLa Promenadeâ€ de cÃ¡lido e Ã­ntimo ambiente, con shows musicales en vivo. AdemÃ¡s en cualquier momento del dÃ­a los huÃ©spedes podrÃ¡n disfrutar del excepcional â€œBeauty & Health Centerâ€ con piscina exterior climatizada, salÃ³n de ', 7, 3, 35, '', 2),
+(13, 'Estancia Vieja', 'algun lugar1234', NULL, NULL, 'Alquilo casa en Estancia Vieja , Ubicada a 800 metros del Arroyo Los Chorrillos, al que se puede acceder a piÃ© o en vehÃ­culo por camino de montaÃ±a, la cabaÃ±a cuenta con 2 dormitorios, el principal con sommier de 2 plazas y secundario con 3 camas de 1 plaza, baÃ±o con ducha escocesa, living con TV y DVD, cocina con heladera, cocina, microondas y vajilla completa.\r\n\r\nParque, vista panorÃ¡mica, pÃ©rgola con asador y equipamiento para varias personas, atendido por sus dueÃ±os.\r\n\r\nRecreaciÃ³n en la zona: Ideal para descansar, contactarse con la naturaleza, hacer caminatas, vista privilegiada y acceso a pie al RÃ­o Cabalango, cabalgatas, paseos, a 5 km de Villa Carlos Paz, visita AL INDIO BAMBA DECLARADO COMO PATRIMONIO HISTÃ“RICO', 8, 5, 4064, 'fotoAnuncio/Img-13.jpg', 2),
+(14, 'CabaÃ±a de Jury', 'a 17 Km de Los Cocos', NULL, NULL, 'Casa con 2 habitaciones y 2 baÃ±os. Hasta 6 personas\r\n\r\nAlquilo casa amoblada excelente estado, muy amplia dos domitorios, vista a las sierras, muy buena iluminacion, amplio livig-comedor, dos (2) BaÃ±os, 1 Garage Cerrado y uno abierto bajo techo en el quincho, parrilla, amplio patio de 250 mt2 con pileta, vista a las sierras y al cuadrado.\r\n\r\nExcelente ubicacion cerca del lago y de la cascada de olaen, a 10 cuadras de la avenida Eden (avenida principal del Centro), a 18 km de Cosquin, 48 Km de Villa Carlos Paz, a 15Km de La Cumbre, a 17 Km de Los Cocos, a 35 Km de Capilla del Monte, a 68 Km de la Ciudad de Cordoba.', 9, 5, 4063, 'fotoAnuncio/Img-14.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -4196,11 +4204,19 @@ INSERT INTO `estado` (`idEstado`, `descripcion`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `fotoestableci` (
-  `idFotoEstableci` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
+`idFotoEstableci` int(11) NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `nombreFotoEstableci` varchar(100) CHARACTER SET utf8 NOT NULL,
   `idEstableci` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `fotoestableci`
+--
+
+INSERT INTO `fotoestableci` (`idFotoEstableci`, `nombre`, `nombreFotoEstableci`, `idEstableci`) VALUES
+(5, '', 'Img-1-1-01-12-2014_04_23_20-6.jpg', 1),
+(6, '', 'Img-1-1-01-12-2014_04_24_10-6.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -4250,8 +4266,8 @@ CREATE TABLE IF NOT EXISTS `mensaje` (
 
 CREATE TABLE IF NOT EXISTS `pais` (
 `id` int(11) NOT NULL,
-  `descripcion` varchar(60) NOT NULL,
-  `codAlfa` char(3) NOT NULL
+  `descripcion` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `codAlfa` char(3) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
 
 --
@@ -5996,7 +6012,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nick` varchar(15) DEFAULT NULL,
   `idCiudad` int(11) DEFAULT NULL,
   `nombreFotoPerfil` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -6008,7 +6024,10 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `email`, `password`, `
 (3, 'cosme', NULL, 'fulanito@homer.com', 'donut', NULL, NULL, NULL),
 (4, 'laika', NULL, 'guau@guau.dog', 'dog', NULL, NULL, NULL),
 (5, 'ddd', NULL, 'fulanito@homer.com.ar', 'pp', NULL, NULL, NULL),
-(6, 'neko', NULL, 'neko@neko.net', 'gato', NULL, NULL, NULL);
+(6, 'neko', NULL, 'neko@neko.net', 'gato', NULL, NULL, NULL),
+(7, 'CG MDP', NULL, 'costagalana@mdp.com.ar', 'costa', NULL, NULL, NULL),
+(8, 'Gerardo', NULL, 'Gerardo@gmail.com', '1234', NULL, NULL, NULL),
+(9, 'falda', NULL, 'lafalda@cor.do.ba', '1234', NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -6124,12 +6143,17 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4063;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4065;
 --
 -- AUTO_INCREMENT de la tabla `establecimiento`
 --
 ALTER TABLE `establecimiento`
-MODIFY `idEstableci` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `idEstableci` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT de la tabla `fotoestableci`
+--
+ALTER TABLE `fotoestableci`
+MODIFY `idFotoEstableci` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
@@ -6144,7 +6168,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1397;
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --

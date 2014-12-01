@@ -28,6 +28,7 @@
 
 			if($activos['cantActivos'] == 0)
 			{	
+				$valido = 1;
 
 				$sql2 = 'INSERT INTO establecimiento (nombre, direccion, descripcion, idUsuario, idTipoEstableci, idCiudad, rutaFotoEstableci, idEstado) 
 					VALUES ("'.$nombre.'", "'.$direccion.'", "'.$descripcion.'", "'.$idUsuario.'", "'.$tipoEstablecimiento.'", "'.$ciudad.'", "", 2)';
@@ -38,53 +39,128 @@
 				}else
 					{
 						$fotoNombre = $_FILES['fileFotoEstableci']['name'];
+						$tipoArchivo = $_FILES['fileFotoEstableci']['type'];
 			//foreach($_FILES['fileFotoEstableci']['name'] as $imagen=>$Nombre)
 			//{
 
 						if($fotoNombre != '')
 						{
-							$sql3 = 'SELECT * FROM establecimiento WHERE idUsuario='.$idUsuario.' AND idEstado = 2';
-							if($consulta=mysqli_query($db->conectarse(), $sql3))
+							if( $tipoArchivo == "image/jpeg" OR $tipoArchivo =="image/gif")
 							{
-								$Rs = mysqli_fetch_assoc($consulta);
-								
-								$idEstableciBD = $Rs['idEstableci'];
-								//echo('nom= '.$nombre.' , direc= '.$direccion.', desc='.$descripcion.', idus='.$idUsuario.', tipoest='.$tipoEstablecimiento.', ciud='.$ciudad.', prov='.$provincia);
-								
 								$Extencion = explode('.' , $fotoNombre);
-								//$Destino = 'fotoEstablecimiento/Img-'.$idEstableci.'-'.rand(10, 30).'_'.rand(10, 30).'_'.rand(10, 30).'.'.$Extencion[1];
-								$Destino = 'fotoEstablecimiento/Img-'.$idEstableciBD.'.'.$Extencion[1];
+								//$destino = 'fotoEstablecimiento/Img-'.$idEstableci.'-'.rand(10, 30).'_'.rand(10, 30).'_'.rand(10, 30).'.'.$Extencion[1];
+								$destino = 'fotoAnuncio/Img-'.$idEstableci.'.'.$Extencion[1];
 
-								//if(copy($_FILES['fileFotoEstableci']['tmp_name'][$imagen] , $Destino))
-								if(copy($_FILES['fileFotoEstableci']['tmp_name'] , $Destino))
+								$sql3 = 'SELECT * FROM establecimiento WHERE idUsuario='.$idUsuario.' AND idEstado = 2';
+								
+								if($consulta=mysqli_query($db->conectarse(), $sql3))
 								{
+									$Rs = mysqli_fetch_assoc($consulta);
+									
+									$idEstableciBD = $Rs['idEstableci'];
 
-									$sql4 = 'UPDATE establecimiento SET rutaFotoEstableci="'.$Destino.'" WHERE
-										  idEstableci='.$idEstableciBD.' AND idUsuario='.$idUsuario;
+									if(!(($idEstableciBD < 1) || (is_null($idEstableciBD)) || ($idEstableciBD == '')))
+									{
+										/*************************************************/
+										//$rtOriginal=$_FILES['fileFotoEstableci']['tmp_name'][$imagen];
+										
+										include 'redimensionar.php';
 
-									mysqli_query($db->conectarse(), $sql4);
+										$origen=$_FILES['fileFotoEstableci']['tmp_name'];
 
+										//if(copy($_FILES['fileFotoEstableci']['tmp_name'][$imagen] , $destino))
+
+										if(!redimensionarI($origen, 286, 165, $destino))
+										{
+											$valido =1;
+											$sql4 = 'UPDATE establecimiento SET rutaFotoEstableci="'.$destino.'" WHERE
+												  idEstableci='.$idEstableciBD.' AND idUsuario='.$idUsuario;
+
+											mysqli_query($db->conectarse(), $sql4);
+
+										}else
+											{
+												echo('<Li>No se pudo subir la foto: <B>'.$fotoNombre.'</B> </Li>');
+											}
+									}
 								}else
 									{
-										echo('<Li>No se pudo subir la foto: <B>'.$fotoNombre.'</B> </Li>');
+										echo('Ocurrio un error ejecutando la operacion de busqueda de establecimiento [' . mysqli_error() . ']');
 									}
 							}else
 								{
-									echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+									$valido = 0;
+									echo ('<html><head>
+												<script type="text/javascript">
+													function confirm_alert()
+													{
+														alert("Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos.");
+													}
+												</script>
+											</head><body>
+											
+											<script>
+												confirm_alert();
+												window.location="baseCargaPublic.php"
+											</script>
+											</body></html>');
+
+									//echo ($valido);
 								}
-						}
-
-
-
-
-						echo '<html><head></head><body>';
-						echo '<script language="javascript">';
-						echo 'window.location="index.php"';
-						//echo 'window.location="detalles_publicacion.php"';
-						echo '</script>';
-						echo '</body></html>';
-						
+						}else
+							{
+								$valido = 0;
+								/*
+								$sql1 = 'UPDATE establecimiento SET nombre="'.$nombre.'", direccion="'.$direccion.'", descripcion="'.$descripcion.'", 
+										idTipoEstableci='.$tipoEstablecimiento.', idCiudad='.$ciudad.' 
+										WHERE idEstableci='.$idEstableci.' AND idUsuario='.$idUsuario;
+								*/
+								//echo "lololo";
+							}
 					}
+				if($valido == 1)
+				{
+					if(!mysqli_query($db->conectarse(), $sql1))
+					{
+						    echo('Ocurrio un error ejecutando el query [' . mysqli_error() . ']');
+						    //echo('nom= '.$nombre.' , direc= '.$direccion.', desc='.$descripcion.', idus='.$idUsuario.', tipoest='.$tipoEstablecimiento.', ciud='.$ciudad.', prov='.$provincia);
+					}else
+						{
+							
+							echo '<html><head></head><body>';
+							echo '<script language="javascript">';
+							echo 'window.location="index.php"';
+							//echo 'window.location="detalles_publicacion.php"';
+							echo '</script>';
+							echo '</body></html>';
+							//echo "lalalal";
+							//echo ($valido);
+						}
+				}else
+					{
+						
+						echo ('<html><head>
+									<script type="text/javascript">
+										function confirm_alert2()
+										{
+											alert("Ocurrió un error en la operación.");
+										}
+									</script>
+								</head><body>
+								
+								<script>');
+						if($fotoNombre != '')
+						{
+							echo ('confirm_alert2();');
+						}
+									
+						echo ('			window.location="baseCargaPublic.php"
+								</script>
+								</body></html>');
+
+						//echo ($valido);
+					}
+
 			}else
 				{
 					echo '<script language="javascript">';
